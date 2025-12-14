@@ -1,22 +1,23 @@
 ---
 # Leave the homepage title empty to use the site title
 title:
-date: 2022-10-24
+date: 2025-12-14
 type: landing
 
 sections:
   - block: hero
     content:
-      title: |
-        Wowchemy
-        Research Group
-      image:
-        filename: welcome.jpg
+      title: FoMaSE Project
+      #image:
+      #  filename: welcome.jpg
       text: |
-        <br>
         
-        The **Wowchemy Research Group** has been a center of excellence for Artificial Intelligence research, teaching, and practice since its founding in 2016.
-  
+        **FoMaSE (Foundations for Macroprogramming-based Software Engineering)** is a basic research project 
+        led by principal investigator **Roberto Casadei**  
+        that was awarded the Italian *FIS3 Starting Grant for ~€1.1M*.  
+        It aims to investigate ways for addressing the **micro-macro link** and 
+        **artificial collective intelligence** by a computer science and software engineering perspective,
+        enabling predictable design of intelligent services and applications (for smart cities and beyond) backed by autonomous artificial collectives.
   - block: collection
     content:
       title: Latest News
@@ -58,13 +59,14 @@ sections:
 
   - block: collection
     content:
-      title: Latest Preprints
+      title: Latest Publications
       text: ""
       count: 5
       filters:
         folders:
           - publication
-        publication_type: 'article'
+        #publication_type: 'article'
+        author: admin
     design:
       view: citation
       columns: '1'

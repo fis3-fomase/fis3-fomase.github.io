@@ -10,6 +10,8 @@ appearance:
   theme_night:
   font: native
   font_size: L
+#  colors:
+#    primary: "#8C1515"  # colore istituzionale
 
 # SEO
 
@@ -18,10 +20,16 @@ marketing:
     site_type: Organization
     local_business_type: ''
     org_name: ''
-    description: 'A highly-customizable Hugo research group theme powered by Wowchemy website builder.'
+    description: 'The FoMaSE (Foundations for Macroprogramming-based Software Engineering) basic research project, 
+        led by principal investigator Roberto Casadei,  
+        was awarded the Italian FIS3 Starting Grant for ~€1.1M.  
+        It aims to investigate ways for addressing the micro-macro link and 
+        artificial collective intelligence by a computer science and software engineering perspective,
+        enabling predictable design of intelligent services and applications (for smart cities and beyond) 
+        backed by autonomous artificial collectives.'
     twitter: 'GetResearchDev'
   analytics:
-    google_analytics: ''
+    google_analytics: 'G-K8FCXYB318'
     baidu_tongji: ''
     google_tag_manager: ''
     microsoft_clarity: ''
@@ -72,7 +80,7 @@ features:
   privacy_pack:
     enable: false
   repository:
-    url: 'https://github.com/<username>/<repository>'
+    url: 'https://github.com/fis3-fomase/fis3-fomase.github.io'
     content_dir: content
     branch: main
   avatar:
