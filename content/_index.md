@@ -8,8 +8,8 @@ sections:
   - block: hero
     content:
       title: FoMaSE Project
-      #image:
-      #  filename: welcome.jpg
+      image:
+        filename: welcome.png
       text: |
         
         **FoMaSE (Foundations for Macroprogramming-based Software Engineering)** is a basic research project 
