@@ -8,4 +8,7 @@ view: citation
 banner:
   caption: ''
   image: ''
+
+filters:
+  tag: ["fomase"]
 ---
