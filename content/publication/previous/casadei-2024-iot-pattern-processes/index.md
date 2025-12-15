@@ -9,4 +9,6 @@ publication_types:
 - article-journal
 publication: '*Internet of Things*'
 doi: 10.1016/j.iot.2024.101436
+_build:
+    list: never
 ---

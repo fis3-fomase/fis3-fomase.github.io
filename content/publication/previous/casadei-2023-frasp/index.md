@@ -13,4 +13,6 @@ publication_types:
 publication: '*2023 IEEE International Conference on Autonomic Computing and Self-Organizing
   Systems (ACSOS)*'
 doi: 10.1109/acsos58161.2023.00026
+_build:
+    list: never
 ---

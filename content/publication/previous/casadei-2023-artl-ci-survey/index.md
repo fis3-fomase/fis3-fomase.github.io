@@ -30,4 +30,6 @@ abstract: Collectiveness is an important property of many systems—both natural
   and engineers. Accordingly, it covers preliminary notions, fundamental concepts,
   and the main research perspectives, identifying opportunities and challenges for
   researchers on artificial and computational collective intelligence engineering.
+_build:
+    list: never
 ---

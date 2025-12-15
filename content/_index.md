@@ -66,7 +66,7 @@ sections:
         folders:
           - publication
         #publication_type: 'article'
-        author: admin
+        author: Roberto Casadei
     design:
       view: citation
       columns: '1'

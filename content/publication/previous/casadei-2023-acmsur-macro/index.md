@@ -23,4 +23,6 @@ tags:
 - collective intelligence
 - system-level programming
 - Macro programming
+_build:
+    list: never
 ---
