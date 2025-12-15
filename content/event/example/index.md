@@ -52,6 +52,8 @@ slides:
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects:
+
+draft: true
 ---
 
 Slides can be added in a few ways:
