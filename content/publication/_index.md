@@ -9,6 +9,7 @@ banner:
   caption: ''
   image: ''
 
-filters:
-  tag: ["fomase"]
+content:
+  filters:
+    tag: ["fomase"]
 ---
