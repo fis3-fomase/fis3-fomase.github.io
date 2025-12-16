@@ -4,6 +4,9 @@ This is the website for the FoMaSE basic research project, led by Roberto Casade
 
 # Website dev details
 
+- Why `data/theme/mytheme.yaml` does not work when set in `params.yaml` ?
+    - > What you have pasted is a HugoBlox Theme Pack (new system), but you are trying to load it using the old Wowchemy / Research Group “appearance.theme_day” system. They are incompatible.
+
 ## [Hugo Research Group Theme](https://github.com/wowchemy/starter-hugo-research-group)
 
 <!-- [![Screenshot](preview.png)](https://hugoblox.com/hugo-themes/) -->

@@ -1,0 +1,18 @@
+# minimal.toml
+# Palette colori minimale per Wowchemy/HugoBlox
+
+[light]
+  primary = "#0D1117"
+  secondary = "#238636"
+  accent = "#2EA043"
+  neutral = "#586069"
+  background = "#FFFFFF"
+  foreground = "#24292F"
+
+[dark]
+  primary = "#58A6FF"
+  secondary = "#79C0FF"
+  accent = "#9ECBFF"
+  neutral = "#8B949E"
+  background = "#0D1117"
+  foreground = "#C9D1D9"
