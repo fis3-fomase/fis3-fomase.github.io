@@ -41,16 +41,16 @@ For project FoMaSE papers, see the [corresponding Publications page](/publicatio
 
 ### Main papers
 
-{{<cite page="/publication/previous/casadei-2023-acmsur-macro" view="4">}}
-{{<cite page="/publication/previous/casadei-2025-tosem" view="4">}}
-{{<cite page="/publication/previous/casadei-2023-artl-ci-survey" view="4">}}
+{{<cite page="/publications/previous/casadei-2023-acmsur-macro" view="4">}}
+{{<cite page="/publications/previous/casadei-2025-tosem" view="4">}}
+{{<cite page="/publications/previous/casadei-2023-artl-ci-survey" view="4">}}
 
 ### Recent papers
 
-{{<cite page="/publication/previous/aguzzi-2025-lmcs-macroswarm" view="4">}}
-{{<cite page="/publication/previous/dblp-confacsos-farabegoli-vc-24" view="4">}}
-{{<cite page="/publication/previous/casadei-2024-ppdp-ac-declarativity" view="4">}}
-{{<cite page="/publication/previous/casadei-2023-frasp" view="4">}}
+{{<cite page="/publications/previous/aguzzi-2025-lmcs-macroswarm" view="4">}}
+{{<cite page="/publications/previous/dblp-confacsos-farabegoli-vc-24" view="4">}}
+{{<cite page="/publications/previous/casadei-2024-ppdp-ac-declarativity" view="4">}}
+{{<cite page="/publications/previous/casadei-2023-frasp" view="4">}}
 
 ## Historical papers
 
