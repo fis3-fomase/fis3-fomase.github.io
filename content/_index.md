@@ -68,6 +68,16 @@ sections:
           icon_pack: "fas"
           #icon: ":computer:"
           #icon_pack: "emoji" 
+        - name: 
+          description: | 
+            {{% cta cta_link="./details/" cta_text="Project Details →" %}}
+        - name: 
+          description: | 
+            {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
+        - name: 
+          description: | 
+            {{% cta cta_link="./contacts/" cta_text="Collaborate →" %}}
+
   - block: collection
     content:
       title: Latest News
@@ -86,6 +96,8 @@ sections:
     design:
       view: card
       columns: '1'
+      spacing:
+        padding: [45px,0,0,0]
   
   # - block: markdown
   #   content:
@@ -120,13 +132,15 @@ sections:
     design:
       view: citation
       columns: '1'
+      spacing:
+        padding: [45px,0,0,0]
 
-  - block: markdown
-    content:
-      title:
-      subtitle:
-      text: |
-        {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
-    design:
-      columns: '1'
+  # - block: markdown
+  #   content:
+  #     title:
+  #     subtitle:
+  #     text: |
+  #       {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
+  #   design:
+  #     columns: '1'
 ---

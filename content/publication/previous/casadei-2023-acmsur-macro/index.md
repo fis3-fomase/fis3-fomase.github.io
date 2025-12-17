@@ -23,6 +23,17 @@ tags:
 - collective intelligence
 - system-level programming
 - Macro programming
-_build:
-    list: never
+build:
+  list: never
 ---
+
+Macroprogramming refers to the theory and practice of expressing the macro(scopic)
+  behaviour of a collective system using a single program. Macroprogramming approaches
+  are motivated by the need of effectively capturing global/system-level aspects and
+  the collective behaviour of multiple computational components, while abstracting
+  over low-level details. Previously, this programming style had been primarily adopted
+  to describe the data-processing logic in sensor networks; recently, research forums
+  on spatial computing, collective systems, and the Internet of Things have provided
+  renewed interest in macro approaches. However, related contributions are still fragmented
+  and lack conceptual consistency. Therefore, to foster principled research, an integrated
+  view of the field is provided, together with opportunities and challenges.
