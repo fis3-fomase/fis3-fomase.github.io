@@ -12,4 +12,5 @@ publication_types:
 publication: '*IEEE International Conference on Autonomic Computing and Self-Organizing
   Systems, ACSOS 2024, Aarhus, Denmark, Sep 16-20, 2024*'
 doi: 10.1109/ACSOS61780.2024.00020
+tags: ["previous"]
 ---

@@ -3,7 +3,9 @@ title: Project Details
 #view: compact # Listing view
 ---
 
-Here we provide some details about the project.
+Here we provide some detailed information about the project FoMaSE (Foundations of Macroprogramming-based Software Engineering).
+
+{{<toc>}}
 
 ## History and background
 
@@ -35,24 +37,33 @@ So, conceptually, the entire distributed computational ensemble is the "single m
 
 What are the benefits of macro-programming? Intuitively, you get a simplified, coarse-grained description of a collective behaviour. Of course, when talking about Turing-equivalent programming paradigms, it is a matter of practical expressiveness and the benefits related to program understanding, maintainability, and so on.
 
+## Related projects
+
+- [COMMON-WEARS: COMMunity-OrieNted WEARrable Computing Systems](https://common-wears.github.io/2022/consortium/) (2022-2025)
+- [Fluidware](https://fluidware-project.github.io/consortium/) (2019-2023)
+
+
 ## Selected Bibliography
 
 For project FoMaSE papers, see the [corresponding Publications page](/publication).
 
 ### Main papers
 
-{{<cite page="/publications/previous/casadei-2023-acmsur-macro" view="4">}}
-{{<cite page="/publications/previous/casadei-2025-tosem" view="4">}}
-{{<cite page="/publications/previous/casadei-2023-artl-ci-survey" view="4">}}
+{{<cite page="/publication/casadei-2023-acmsur-macro" view="4">}}
+{{<cite page="/publication/casadei-2025-tosem" view="4">}}
+{{<cite page="/publication/casadei-2023-artl-ci-survey" view="4">}}
 
 ### Recent papers
 
-{{<cite page="/publications/previous/aguzzi-2025-lmcs-macroswarm" view="4">}}
-{{<cite page="/publications/previous/dblp-confacsos-farabegoli-vc-24" view="4">}}
-{{<cite page="/publications/previous/casadei-2024-ppdp-ac-declarativity" view="4">}}
-{{<cite page="/publications/previous/casadei-2023-frasp" view="4">}}
+{{<cite page="/publication/aguzzi-2025-lmcs-macroswarm" view="4">}}
+{{<cite page="/publication/dblp-confacsos-farabegoli-vc-24" view="4">}}
+{{<cite page="/publication/casadei-2024-ppdp-ac-declarativity" view="4">}}
+{{<cite page="/publication/casadei-2023-frasp" view="4">}}
 
-## Historical papers
+### Historical papers
+
+{{<cite page="/publication/newton-2004-region-streams" view="4">}}
+{{<cite page="/publication/sawyer-2003-micromacrolink" view="4">}}
 
 
 

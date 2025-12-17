@@ -32,4 +32,5 @@ tags:
 - declarative programming
 - macro-programming
 - self-organisation
+- previous
 ---

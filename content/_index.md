@@ -76,7 +76,7 @@ sections:
             {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
         - name: 
           description: | 
-            {{% cta cta_link="./contacts/" cta_text="Collaborate →" %}}
+            {{% cta cta_link="./contact/" cta_text="Collaborate →" %}}
 
   - block: collection
     content:
@@ -127,8 +127,9 @@ sections:
       filters:
         folders:
           - publication
+        tag: "fomase"
         #publication_type: 'article'
-        author: Roberto Casadei
+        #author: Roberto Casadei
     design:
       view: citation
       columns: '1'
