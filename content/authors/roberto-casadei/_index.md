@@ -75,7 +75,7 @@ highlight_name: true
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Principal Investigators
+  - Principal Investigator
 ---
 
 Roberto Casadei is a senior assistant professor at the University of Bologna (Italy). He has a PhD in Computer Science & Engineering from the same university, with a thesis awarded by the IEEE TCSC. His research interests revolve around software engineering and distributed artificial intelligence. He has 80+ publications in international journals and conferences on topics including collective intelligence, swarm robotics, self-* systems, and IoT/CPS. He also contributed to open-source programming frameworks and simulators (e.g., ScaFi). He have served as PC chair of COORDINATION'26, and partecipated in the organizing and program committees of many conferences such as ACSOS, DisCoTec, ICCCI, AAAI, ECAI, and SAC, as a guest editor and reviewer for renowned international journals, and associate editor of Elsevier IoT, JAISCR, and Wiley CCPE. He received the IEEE TCSC Award for Excellence'24 (ECR), for contributions to "paradigms supporting the engineering of large-scale collective and self-organizing systems". He was awared the FIS3 Starting Grant for €1.1M for his project FoMaSE.

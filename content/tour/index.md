@@ -33,7 +33,7 @@ sections:
         align: right
         background:
           image:
-            filename: welcome.png
+            filename: welcome.jpg
             filters:
               brightness: 0.5
           position: center

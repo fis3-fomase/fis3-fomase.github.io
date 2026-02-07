@@ -45,11 +45,10 @@ sections:
           description: "5-years Project Duration"
           icon: "clock"
           icon_pack: fas
-        - name: "Roberto Casadei"
-          description: "Principal Investigator"
-          icon: "user-secret"
-          icon_pack: fas 
-          # https://bootstrap.hugoblox.com/getting-started/page-builder/#icons
+        - name: "University of Bologna"
+          description: "Host Institution"
+          icon: "university"
+          icon_pack: "fas" 
         - name: "~€1.1M"
           description: "Total Funding"
           icon: "euro-sign"
@@ -58,22 +57,37 @@ sections:
           description: "Project Type"
           icon: "mortar-board" # "search-plus" # "search"
           icon_pack: "fas"
-        - name: "University of Bologna"
-          description: "Host Institution"
-          icon: "university"
-          icon_pack: "fas" 
-        - name: "Computer Science & Engineering"
+        - name: "Roberto Casadei"
+          description: "Principal Investigator"
+          icon: "user-secret"
+          icon_pack: fas 
+          # https://bootstrap.hugoblox.com/getting-started/page-builder/#icons
+        - name: "Computer Science & Eng."
           description: "Topic Area"
           icon: "microchip" #"computer-desktop"
           icon_pack: "fas"
           #icon: ":computer:"
           #icon_pack: "emoji" 
-        - name: 
-          description: | 
-            {{% cta cta_link="./details/" cta_text="Project Details →" %}}
+        # last line
+        - name: "&lt;X&gt; Post-Docs, &lt;Y&gt; PhDs"
+          description: "Number of Team Members"
+          icon: "users"
+          icon_pack: "fas"
+        - name: "&lt;N&gt; Publications"
+          description: "Current Project Output"
+          icon: "line-chart" #"arrow-circle-up" # "plane"
+          icon_pack: "fas" 
+        - name: "&lt;K&gt; Collaborations"
+          description: "Inter/national Networking"
+          icon: "globe" 
+          icon_pack: "fas"
+        # last line of icons
         - name: 
           description: | 
             {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
+        - name: 
+          description: | 
+            {{% cta cta_link="./details/" cta_text="Project Details →" %}}
         - name: 
           description: | 
             {{% cta cta_link="./contact/" cta_text="Collaborate →" %}}
