@@ -15,7 +15,7 @@ sections:
         street: Via dell'Università, 50
         city: Cesena
         region: FC
-        postcode: '74521'
+        postcode: '47521'
         country: Italy
         country_code: IT
 #      coordinates:
