@@ -10,6 +10,7 @@ publication_types:
 publication: '*International Foundation for Autonomous Agents and Multiagent Systems
   / ACM*'
 doi: 10.65109/SAXG2906
+tags: ["fomase"]
 ---
 
 This paper has been accepted in the Blue Sky Ideas track of AAMAS'26.
