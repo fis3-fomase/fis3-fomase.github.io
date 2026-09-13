@@ -16,11 +16,19 @@
 //  Stat grid (features block)
 // -----------------------------------------------------------------------------
 
+// Three tiles per row, as in the theme's original `col-12 col-sm-4` grid: the
+// homepage groups its items into rows of three deliberately (see the `last
+// line` comments in `content/_index.md`), and an auto-fit grid breaks that
+// grouping at wide viewports. Single column on phones, as upstream.
 .fm-stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--fm-gap);
   margin-top: 2.25rem;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .fm-stat {
@@ -28,9 +36,11 @@
   border: 1px solid var(--fm-border);
   border-radius: var(--fm-radius);
   padding: 1.4rem 1.3rem;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 0.35rem;
   transition: transform var(--fm-dur-fast) var(--fm-ease),
               border-color var(--fm-dur-fast) var(--fm-ease),
@@ -43,22 +53,23 @@
   }
 }
 
+// The icon is the visual anchor again (upstream `.featurette-icon`: block,
+// centred, 3rem), not a tinted chip beside the value.
 .fm-stat__icon {
-  width: 2.1rem;
-  height: 2.1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--fm-radius-sm);
-  background: var(--fm-accent-soft);
-  margin-bottom: 0.35rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  font-size: 2.75rem;
+  color: var(--fm-accent);
 
   i, .fas, .fab, .far {
     color: var(--fm-accent);
-    font-size: 0.95rem;
+    font-size: inherit;
   }
 
-  img.svg-icon { width: 1rem; height: 1rem; }
+  img.svg-icon { width: 2.75rem; height: 2.75rem; }
 }
 
 .fm-stat__value {
