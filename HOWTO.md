@@ -55,6 +55,29 @@ ignores any field whose name starts with an underscore. Drop the underscore to
 make a field take effect. This is how a note like "accepted for publication" is
 kept in the `.bib` without it appearing on the site.
 
+### Abstracts
+
+An abstract comes from the `abstract` field of the BibTeX entry and renders as
+the **Abstract** section on the paper's own page (`/publication/<slug>/`). Only
+3 of the 11 current entries carry one.
+
+For a paper that is **not yet imported**, add it to `publications.bib`:
+
+```bibtex
+  abstract = {One paragraph, no line-break tricks needed.},
+```
+
+For a paper whose page **already exists**, editing the `.bib` does nothing (see
+the non-overwrite note below) — add it to the page's front matter instead:
+
+```yaml
+# content/publication/<slug>/index.md
+abstract: |-
+  One paragraph. The `|-` block form lets you wrap lines freely.
+```
+
+Keep the `.bib` in sync anyway, so a future regeneration produces the same page.
+
 **The importer never overwrites an existing page.** Anything you hand-write into a
 `content/publication/<slug>/index.md` — an abstract, a summary, extra `links:` —
 survives every future import. The trade-off is that editing an entry in the `.bib`

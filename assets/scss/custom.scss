@@ -568,6 +568,64 @@
 }
 
 // -----------------------------------------------------------------------------
+//  Publication / post single page
+// -----------------------------------------------------------------------------
+//  The theme puts a bare <h1> in a ~760px column and lets the global h1 scale
+//  apply, so a real paper title lands at 56.7px and runs to five lines before
+//  the reader sees anything else. Academic titles are long by nature: give the
+//  article header its own, smaller scale.
+
+.article-container {
+  > h1 {
+    font-size: clamp(1.55rem, calc(1.25rem + 1.1vw), 2.15rem);
+    line-height: 1.24;
+    letter-spacing: -0.018em;
+    margin-bottom: 0.6rem;
+    text-wrap: balance;
+  }
+
+  .article-metadata {
+    margin-bottom: 1rem;
+
+    .author-highlighted a,
+    a { color: var(--fm-ink-muted); }
+  }
+
+  .btn-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.75rem;
+
+    .btn { margin: 0; }
+  }
+}
+
+// Abstract: set in the citation serif, a touch larger than body copy, with a
+// quiet rule above it so it reads as the paper's own voice rather than site text.
+.pub-abstract {
+  font-family: $font-cite;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fm-ink);
+}
+
+// Tag chips ("Fomase" etc). Bootstrap's .badge-light is a light-grey pill that
+// keeps its light colours in dark mode.
+.badge-light {
+  background: var(--fm-accent-soft);
+  color: var(--fm-accent);
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 0.32em 0.7em;
+}
+
+.dark .badge-light {
+  background: var(--fm-accent-soft);
+  color: var(--fm-accent);
+}
+
+// -----------------------------------------------------------------------------
 //  Motion
 // -----------------------------------------------------------------------------
 //  IMPORTANT: the resting state of [data-reveal] is VISIBLE. The hidden state
