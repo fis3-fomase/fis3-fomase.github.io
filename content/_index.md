@@ -69,15 +69,15 @@ sections:
           #icon: ":computer:"
           #icon_pack: "emoji" 
         # last line
-        - name: "&lt;X&gt; Post-Docs, &lt;Y&gt; PhDs"
+        - name: "4+ Post-Docs, 2+ PhDs"
           description: "Number of Team Members"
           icon: "users"
           icon_pack: "fas"
-        - name: "&lt;N&gt; Publications"
+        - name: "5+ Publications" # (1) AAMAS'26 bluesky, (2) IJCAI'26 co-sleec, (3) ACSOS'26 DPF, (4) SASSO'26, (5) SISSY'26
           description: "Current Project Output"
           icon: "line-chart" #"arrow-circle-up" # "plane"
           icon_pack: "fas" 
-        - name: "&lt;K&gt; Collaborations"
+        - name: "3+ Collaborations" # (1) GSSI, (2) Aarhus (Esterle, Prasad), (3) Oslo (Sieve), 
           description: "Inter/national Networking"
           icon: "globe" 
           icon_pack: "fas"
