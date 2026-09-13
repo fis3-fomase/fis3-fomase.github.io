@@ -1,0 +1,101 @@
+{{/* FoMaSE: two-tier, year-grouped publication list.                          */}}
+{{/*                                                                           */}}
+{{/* Splits a publication section into project outputs (tagged with            */}}
+{{/* `project_tag`) and everything else. Only the project outputs are shown;   */}}
+{{/* set `show_background: true` to also list the rest, collapsed, underneath. */}}
+{{/*                                                                           */}}
+{{/* The split is deliberately keyed on the PRESENCE of `project_tag` rather   */}}
+{{/* than on a `previous` tag: tags are generated from the `keywords` field of */}}
+{{/* publications.bib, so anything without an explicit FoMaSE keyword is       */}}
+{{/* background by default and needs no tag at all.                            */}}
+
+{{ $block := .wcBlock }}
+{{ $page := .wcPage }}
+{{ $folder := $block.content.folder | default "publication" }}
+{{ $project_tag := lower ($block.content.project_tag | default "fomase") }}
+
+{{/* Partition the section. */}}
+{{ $project := slice }}
+{{ $background := slice }}
+{{ range where site.RegularPages "Section" $folder }}
+  {{ $tags := apply (.Params.tags | default slice) "lower" "." }}
+  {{ if in $tags $project_tag }}
+    {{ $project = $project | append . }}
+  {{ else }}
+    {{ $background = $background | append . }}
+  {{ end }}
+{{ end }}
+{{ with $project }}{{ $project = sort . "Date" "desc" }}{{ end }}
+{{ with $background }}{{ $background = sort . "Date" "desc" }}{{ end }}
+
+<div class="col-12 pub-list">
+
+  {{ with $block.content.text }}
+    <div class="pub-list__intro">{{ . | emojify | $page.RenderString }}</div>
+  {{ end }}
+
+  {{/* ---- Project outputs, grouped by year ---- */}}
+  <section class="pub-group pub-group--project">
+    {{ with $block.content.project_title }}
+      <h2 class="pub-group__title">{{ . | markdownify | emojify }}</h2>
+    {{ end }}
+
+    {{ if $project }}
+      {{/* Distinct years, already in descending order because $project is sorted. */}}
+      {{ $years := slice }}
+      {{ range $project }}
+        {{ $y := .Date.Format "2006" }}
+        {{ if not (in $years $y) }}{{ $years = $years | append $y }}{{ end }}
+      {{ end }}
+      {{ range $years }}
+        {{ $year := . }}
+        <div class="pub-year-group">
+          <div class="pub-year-group__rail"><span class="pub-year-group__year">{{ $year }}</span></div>
+          <div class="pub-year-group__items">
+            {{ range $project }}
+              {{ if eq (.Date.Format "2006") $year }}
+                {{ partial "views/citation" (dict "item" . "show_year" false) }}
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    {{ else }}
+      <p class="pub-list__empty">{{ $block.content.empty_text | default "No project publications yet — watch this space." }}</p>
+    {{ end }}
+  </section>
+
+  {{/* ---- Background & related work, collapsed ---- */}}
+  {{/* Off unless the page opts in with `show_background: true`. Do not switch */}}
+  {{/* this to `| default true`: in Hugo `false | default true` yields true,    */}}
+  {{/* because false is falsy, so the flag could never be turned back off.      */}}
+  {{ if and $block.content.show_background $background }}
+    <details class="pub-group pub-group--background">
+      <summary class="pub-group__summary">
+        <span class="pub-group__summary-label">{{ $block.content.background_title | default "Background & Related Work" }}</span>
+        <span class="pub-group__count">{{ len $background }}</span>
+      </summary>
+      <div class="pub-group__body">
+        {{ $byears := slice }}
+        {{ range $background }}
+          {{ $y := .Date.Format "2006" }}
+          {{ if not (in $byears $y) }}{{ $byears = $byears | append $y }}{{ end }}
+        {{ end }}
+        {{ range $byears }}
+          {{ $year := . }}
+          <div class="pub-year-group">
+            <div class="pub-year-group__rail"><span class="pub-year-group__year">{{ $year }}</span></div>
+            <div class="pub-year-group__items">
+              {{ range $background }}
+                {{ if eq (.Date.Format "2006") $year }}
+                  {{ partial "views/citation" (dict "item" . "show_year" false) }}
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </details>
+  {{ end }}
+
+</div>

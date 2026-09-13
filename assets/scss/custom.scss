@@ -1,0 +1,616 @@
+// =============================================================================
+//  FoMaSE components + motion
+// =============================================================================
+//  Loaded last by the theme's main.scss, after `template.scss` (which owns the
+//  tokens and typography this file consumes).
+//
+//  Reminder: this file is run through Hugo's template engine before Sass sees
+//  it, so `{{` and `}}` are live delimiters. Do not introduce them.
+//
+//  libsass caveats that apply here:
+//    * `min()` / `max()` are Sass built-ins and shadow the CSS functions.
+//    * mixed-unit arithmetic (rem + vw) must be wrapped in `calc()`.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+//  Stat grid (features block)
+// -----------------------------------------------------------------------------
+
+.fm-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--fm-gap);
+  margin-top: 2.25rem;
+}
+
+.fm-stat {
+  background: var(--fm-surface);
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  padding: 1.4rem 1.3rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform var(--fm-dur-fast) var(--fm-ease),
+              border-color var(--fm-dur-fast) var(--fm-ease),
+              box-shadow var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--fm-border-strong);
+    box-shadow: var(--fm-shadow-md);
+  }
+}
+
+.fm-stat__icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--fm-radius-sm);
+  background: var(--fm-accent-soft);
+  margin-bottom: 0.35rem;
+
+  i, .fas, .fab, .far {
+    color: var(--fm-accent);
+    font-size: 0.95rem;
+  }
+
+  img.svg-icon { width: 1rem; height: 1rem; }
+}
+
+.fm-stat__value {
+  font-family: $sta-font-heading, sans-serif;
+  font-size: clamp(1.25rem, calc(1.1rem + 0.55vw), 1.6rem);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--fm-ink);
+  margin: 0;
+}
+
+.fm-stat__label {
+  font-size: 0.87rem;
+  line-height: 1.5;
+  color: var(--fm-ink-muted);
+
+  p { margin: 0; }
+}
+
+// CTA tiles are the nameless items whose description holds a `cta` shortcode.
+.fm-stat--cta {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--fm-accent-soft);
+  border-color: transparent;
+
+  // Neutralise the `cta` shortcode's margin scheme inside a tile.
+  //
+  // Upstream gives .cta-group negative inline margins that cancel a matching
+  // positive margin on each li (a gutter for multi-button rows), plus a bottom
+  // margin on both. With a single centred button that bottom margin is dead
+  // space the tile counts when centring, pushing the button ~17px above centre.
+  // Zeroing all of it is simpler than compensating, and there is only ever one
+  // button per tile so the gutter is not needed.
+  .cta-group {
+    justify-content: center;
+    margin: 0;
+  }
+
+  .cta-group li {
+    margin: 0;
+  }
+
+  .btn {
+    background: var(--fm-accent);
+    border-color: var(--fm-accent);
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 0.45rem 1.1rem;
+
+    &:hover {
+      background: var(--fm-accent-strong);
+      border-color: var(--fm-accent-strong);
+      color: #fff;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+//  Publication list
+// -----------------------------------------------------------------------------
+
+.pub-list {
+  max-width: 62rem;
+  margin-inline: auto;
+}
+
+.pub-list__intro {
+  color: var(--fm-ink-muted);
+  font-size: 1.02rem;
+  margin-bottom: 2rem;
+}
+
+// NB: no `text-transform: uppercase` here — it would render "FoMaSE Outputs"
+// as "FOMASE OUTPUTS" and destroy the project's own capitalisation.
+.pub-group__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fm-ink-muted);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--fm-border);
+  margin-bottom: 1.5rem;
+}
+
+.pub-year-group {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.pub-year-group__rail {
+  position: relative;
+}
+
+.pub-year-group__year {
+  position: sticky;
+  top: 5.5rem;
+  display: block;
+  font-family: $sta-font-mono, ui-monospace, monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--fm-ink-faint);
+  padding-top: 0.9rem;
+}
+
+.pub-item {
+  padding: 0.9rem 0 1.1rem;
+  border-bottom: 1px solid var(--fm-border);
+
+  &:last-child { border-bottom: 0; }
+}
+
+.pub-item__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pub-item__title {
+  font-size: 1.04rem;
+  font-weight: 600;
+  line-height: 1.38;
+  margin: 0;
+  flex: 1 1 22rem;
+
+  a {
+    color: var(--fm-ink);
+    text-decoration: none;
+    transition: color var(--fm-dur-fast) var(--fm-ease);
+
+    &:hover { color: var(--fm-accent); }
+  }
+}
+
+.pub-item__badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.pub-badge {
+  font-family: $sta-font-nav, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fm-accent);
+  background: var(--fm-accent-soft);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  white-space: nowrap;
+}
+
+.pub-year {
+  font-family: $sta-font-mono, ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--fm-ink-faint);
+}
+
+.pub-item__authors {
+  font-size: 0.88rem;
+  color: var(--fm-ink-muted);
+  margin-top: 0.3rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover { color: var(--fm-accent); }
+  }
+
+  // The theme's author partial emits ", " between spans; keep it tight.
+  span { white-space: nowrap; }
+
+  .author-highlighted a { color: var(--fm-ink); font-weight: 600; }
+}
+
+.pub-item__venue {
+  font-family: $font-cite;
+  font-size: 0.93rem;
+  font-style: italic;
+  color: var(--fm-ink-muted);
+  margin-top: 0.18rem;
+
+  em, i { font-style: italic; }
+}
+
+.pub-item__links {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  .btn { margin: 0; }
+}
+
+.pub-list__empty {
+  color: var(--fm-ink-muted);
+  font-style: italic;
+}
+
+// Background & related work — native <details> disclosure, no JS.
+.pub-group--background {
+  margin-top: 3rem;
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  background: var(--fm-surface-alt);
+}
+
+.pub-group__summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.25rem;
+  font-family: $sta-font-heading, sans-serif;
+  font-weight: 600;
+  color: var(--fm-ink);
+  border-radius: var(--fm-radius);
+
+  &::-webkit-details-marker { display: none; }
+
+  &::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: auto;
+    border-right: 2px solid var(--fm-ink-faint);
+    border-bottom: 2px solid var(--fm-ink-faint);
+    transform: rotate(45deg);
+    transition: transform var(--fm-dur-fast) var(--fm-ease);
+  }
+
+  &:hover { color: var(--fm-accent); }
+}
+
+.pub-group--background[open] > .pub-group__summary::after {
+  transform: rotate(-135deg);
+}
+
+.pub-group__count {
+  font-family: $sta-font-mono, ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--fm-ink-muted);
+  background: var(--fm-accent-soft);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+}
+
+.pub-group__body {
+  padding: 0.25rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--fm-border);
+}
+
+@media (max-width: 767.98px) {
+  .pub-year-group {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pub-year-group__year {
+    position: static;
+    padding-top: 1rem;
+  }
+
+  // Narrow columns cannot fit a badge beside a two-line title without the two
+  // colliding; stack the badges under the title instead.
+  .pub-item__head {
+    display: block;
+  }
+
+  .pub-item__badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .pub-group__body {
+    padding-inline: 0.9rem;
+  }
+
+  .pub-group__summary {
+    padding-inline: 0.9rem;
+  }
+}
+
+// -----------------------------------------------------------------------------
+//  People
+// -----------------------------------------------------------------------------
+
+.people-group__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fm-ink-muted);
+  text-align: center;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.people-person {
+  padding: 0.5rem 1rem 1.5rem;
+  text-align: center;
+}
+
+// Fallback for a member with no avatar image.
+// Must be scoped under `.people-widget` to outrank the theme's own
+// `.people-widget .avatar { width: 80%; max-width: 150px; height: auto }` —
+// that `height: auto` collapses a flex box into an ellipse. Matching the
+// theme's width and forcing a 1:1 ratio keeps monograms and photos identical.
+.people-widget .avatar.avatar-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 150px;
+  aspect-ratio: 1;
+  font-family: $sta-font-heading, sans-serif;
+  font-size: clamp(1.8rem, calc(1.2rem + 1.6vw), 2.6rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--fm-accent);
+  background: var(--fm-accent-soft);
+  border: 1px solid var(--fm-border);
+  user-select: none;
+}
+
+.portrait-title h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.1rem;
+}
+
+.portrait-title h3 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--fm-ink-muted);
+  line-height: 1.45;
+}
+
+// -----------------------------------------------------------------------------
+//  News cards
+// -----------------------------------------------------------------------------
+
+.card-simple__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+.card-more {
+  margin-left: auto;
+  font-family: $sta-font-nav, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--fm-accent);
+  text-decoration: none;
+  white-space: nowrap;
+
+  span {
+    display: inline-block;
+    transition: transform var(--fm-dur-fast) var(--fm-ease);
+  }
+
+  &:hover {
+    color: var(--fm-accent-strong);
+    span { transform: translateX(3px); }
+  }
+}
+
+.summary-link { text-decoration: none; }
+
+// -----------------------------------------------------------------------------
+//  Hero field canvas
+// -----------------------------------------------------------------------------
+
+.fm-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms var(--fm-ease);
+
+  // Mask geometry, measured from the rendered hero rather than guessed:
+  //   text  occupies x 1-57%,  y 0-70%
+  //   image occupies x 59-99%, y 0-100%  (opaque, full height)
+  // So the only area where the field can actually be SEEN is the strip below
+  // the text. A left-to-right ramp puts its strength behind the image, where
+  // it is invisible; a top-to-bottom one blooms it in that free strip instead,
+  // while staying faint across the running text above.
+  $fm-hero-mask: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.14) 48%,
+    rgba(0, 0, 0, 0.55) 70%,
+    rgba(0, 0, 0, 1) 88%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-mask-image: $fm-hero-mask;
+  mask-image: $fm-hero-mask;
+}
+
+.fm-hero-canvas.is-ready { opacity: 1; }
+
+@media (max-width: 767.98px) {
+  // Stacked layout: the copy spans the full width and the artwork sits below
+  // it, so there is no bottom strip to bloom into. Keep it uniformly faint.
+  $fm-hero-mask-sm: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+
+  .fm-hero-canvas {
+    -webkit-mask-image: $fm-hero-mask-sm;
+    mask-image: $fm-hero-mask-sm;
+  }
+
+  .fm-hero-canvas.is-ready { opacity: 0.45; }
+}
+
+.wg-hero > .container { position: relative; z-index: 1; }
+
+// -----------------------------------------------------------------------------
+//  Callouts ({{< callout >}}) — dark mode
+// -----------------------------------------------------------------------------
+//  The theme hardcodes light values (.alert-note is #12537e on #f6fbfe) and
+//  ships dark overrides only for `a`, `pre` and `code` INSIDE an alert — never
+//  for the panel itself. So in dark mode a callout renders as a near-white slab
+//  on a #0b1119 page. /details/ has four of them, which is where it shows.
+//
+//  Specificity note: the theme's rules are `.alert-note` (0,1,0) and
+//  `div.alert > div:first-child::before` (0,2,3); prefixing with `.dark` clears
+//  both without needing !important.
+
+.dark {
+  .alert {
+    color: var(--fm-ink);
+    background-color: var(--fm-surface-alt);
+    border-color: var(--fm-border);
+  }
+
+  .alert-note {
+    background-color: var(--fm-accent-soft);
+    border-color: var(--fm-border-strong);
+  }
+
+  div.alert > div:first-child::before {
+    color: var(--fm-accent);
+  }
+
+  .alert-warning {
+    background-color: rgba(255, 176, 32, 0.12);
+    border-color: rgba(255, 176, 32, 0.42);
+  }
+
+  div.alert-warning > div:first-child::before {
+    color: #ffb020;
+  }
+
+  // <mark>, from the {{< hl >}} shortcode: the browser default is black on
+  // yellow, which is jarring against a dark page.
+  mark {
+    background-color: rgba(255, 208, 79, 0.26);
+    color: var(--fm-ink);
+    border-radius: 3px;
+    padding: 0 0.15em;
+  }
+}
+
+// -----------------------------------------------------------------------------
+//  Table of contents
+// -----------------------------------------------------------------------------
+//  The animated sliding underline defined for prose links is fine on a stray
+//  link in a paragraph, but the TOC is a stack of ~7 links and the effect reads
+//  as noise across all of them. Opt the TOC out and give it a quiet hover: a
+//  colour shift plus a thin accent rule on the left, no sweep.
+//  `#TableOfContents` (id) already outranks `.article-style a:not(.btn)`.
+
+#TableOfContents a,
+.toc-top a {
+  background-image: none;
+  border-left: 2px solid transparent;
+  transition: color var(--fm-dur-fast) var(--fm-ease),
+              border-color var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--fm-accent);
+    border-left-color: var(--fm-accent);
+    background-image: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+//  Motion
+// -----------------------------------------------------------------------------
+//  IMPORTANT: the resting state of [data-reveal] is VISIBLE. The hidden state
+//  is scoped to `.js-reveal`, a class the motion script puts on <html> only
+//  once it has committed to running. If the script never runs, errors, or is
+//  blocked, every element stays visible — the page must never render blank.
+
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
+  transition: opacity var(--fm-dur) var(--fm-ease),
+              transform var(--fm-dur) var(--fm-ease);
+  // `--i` is the stagger step, set per element by the templates (clamped to 7).
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+.js-reveal [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fm-dur: 1ms;
+    --fm-dur-fast: 1ms;
+  }
+
+  .js-reveal [data-reveal],
+  .js-reveal [data-reveal].is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .fm-hero-canvas { transition: none; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -3,8 +3,8 @@
   publish = "public"
 
 [build.environment]
-  HUGO_VERSION = "0.135.0"
-  HUGO_ENABLEGITINFO = "true"
+  HUGO_VERSION = "0.154.5"
+  HUGO_ENABLEGITINFO = "false"  # match `enableGitInfo: false` in config/_default/hugo.yaml
 
 [context.production.environment]
   HUGO_ENV = "production"

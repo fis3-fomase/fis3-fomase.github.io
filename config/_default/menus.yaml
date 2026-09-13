@@ -9,13 +9,13 @@ main:
     weight: 10
   - name: Project Details
     url: /details
-    weight: 10
+    weight: 20
   - name: News
     url: post
-    weight: 20
+    weight: 30
   - name: People
     url: people
-    weight: 30
+    weight: 40
 #  - name: Events
 #    url: event
 #    weight: 40

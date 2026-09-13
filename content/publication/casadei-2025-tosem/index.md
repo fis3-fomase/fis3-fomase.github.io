@@ -15,5 +15,6 @@ publication_types:
 - article-journal
 publication: '*ACM Transactions on Software Engineering and Methodology*'
 doi: 10.1145/3712004
-tags: ["previous"]
+tags:
+- previous
 ---

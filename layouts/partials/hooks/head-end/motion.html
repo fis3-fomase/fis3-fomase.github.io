@@ -1,0 +1,26 @@
+{{/* FoMaSE motion: arm the reveal system before first paint.                  */}}
+{{/*                                                                           */}}
+{{/* [data-reveal] elements are VISIBLE by default (see custom.scss). Adding   */}}
+{{/* `.js-reveal` to <html> here is what hides them, and it happens only when  */}}
+{{/* we are confident the observer in the body-end hook will run:              */}}
+{{/*   - JS is on (this script executing at all)                               */}}
+{{/*   - IntersectionObserver exists                                           */}}
+{{/*   - the visitor has not asked for reduced motion                          */}}
+{{/* A watchdog also strips the class if nothing has revealed shortly after    */}}
+{{/* load, so a failure in the body script can never leave the page blank.     */}}
+<script>
+(function () {
+  try {
+    var r = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (r || !('IntersectionObserver' in window)) return;
+    var d = document.documentElement;
+    d.classList.add('js-reveal');
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (!d.hasAttribute('data-reveal-ready')) d.classList.remove('js-reveal');
+      }, 1200);
+    });
+  } catch (e) { /* leave everything visible */ }
+})();
+</script>
+<noscript><style>.js-reveal [data-reveal]{opacity:1!important;transform:none!important}</style></noscript>

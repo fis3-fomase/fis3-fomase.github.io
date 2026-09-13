@@ -20,6 +20,7 @@ abstract: Macroprogramming refers to the theory and practice of expressing the m
   and lack conceptual consistency. Therefore, to foster principled research, an integrated
   view of the field is provided, together with opportunities and challenges.
 tags:
+- previous
 - collective intelligence
 - system-level programming
 - Macro programming

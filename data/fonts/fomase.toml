@@ -1,0 +1,16 @@
+# FoMaSE font pack.
+#
+# `google_fonts` MUST start with "family=" — site_head.html errorf()s otherwise,
+# because it builds a Google Fonts CSS2 API URL from this string verbatim.
+#
+# Source Serif 4 is loaded here for citation/venue typography but is not one of
+# the four slots the theme exposes, so it is referenced directly from SCSS.
+
+name = "FoMaSE"
+
+google_fonts = "family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500"
+
+heading_font = "Inter Tight"
+body_font = "Inter"
+nav_font = "Inter"
+mono_font = "JetBrains Mono"

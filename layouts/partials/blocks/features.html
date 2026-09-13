@@ -1,0 +1,65 @@
+{{/* FoMaSE override of the theme's `features` block.                          */}}
+{{/*                                                                           */}}
+{{/* Upstream emits a rigid `col-12 col-sm-4` grid with the icon as the visual */}}
+{{/* anchor. This renders an auto-fitting card grid with the VALUE as the      */}}
+{{/* anchor, the label beneath it, and the icon demoted to a tinted chip.      */}}
+{{/*                                                                           */}}
+{{/* Items with no `name` are treated as call-to-action tiles: the homepage    */}}
+{{/* uses three of them whose `description` is a `cta` shortcode call, so       */}}
+{{/* `description` must keep going through RenderString.                       */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+<div class="row featurette">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading text-center">
+    <h1>{{ . | markdownify | emojify }}</h1>
+    {{ with $block.content.subtitle }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  {{ with $block.content.text }}
+  <div class="col-md-12">
+    {{ . | emojify | $page.RenderString }}
+  </div>
+  {{ end }}
+
+  <div class="col-12">
+    <div class="fm-stat-grid">
+      {{ range $i, $item := $block.content.items }}
+        {{ $pack := or $item.icon_pack "fas" }}
+        {{ $pack_prefix := $pack }}
+        {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+          {{ $pack_prefix = "fa" }}
+        {{ end }}
+        {{ $is_cta := not $item.name }}
+
+        {{/* Clamp the stagger: 12 tiles at 55ms each would take most of a second. */}}
+        {{ $step := cond (lt $i 8) $i 7 }}
+        <div class="fm-stat{{ if $is_cta }} fm-stat--cta{{ end }}" data-reveal style="--i: {{ $step }}">
+          {{ with $item.icon }}
+          <div class="fm-stat__icon featurette-icon" aria-hidden="true">
+            {{- if eq $pack "emoji" -}}
+              {{- . | emojify -}}
+            {{- else if eq $pack "custom" -}}
+              {{- $svg_icon := resources.Get (printf "media/icons/%s.svg" .) -}}
+              {{- if $svg_icon -}}<img src="{{ $svg_icon.RelPermalink }}" alt="" class="svg-icon svg-baseline" loading="lazy">{{- end -}}
+            {{- else -}}
+              <i class="{{ $pack }} {{ $pack_prefix }}-{{ . }}"></i>
+            {{- end -}}
+          </div>
+          {{ end }}
+
+          {{ with $item.name }}
+            <div class="fm-stat__value section-subheading" data-countup>{{ . | markdownify | emojify }}</div>
+          {{ end }}
+
+          {{ with $item.description }}
+            <div class="fm-stat__label">{{ . | emojify | $page.RenderString }}</div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

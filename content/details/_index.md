@@ -32,7 +32,7 @@ Conceptually, macro-programming is related to (at least) three broad areas:
 
 * **multi-agent systems (MAS)**, including normative MAS, organisational paradigms, holonic MAS, etc.
 * **distributed systems**, including service computing (e.g., choreographies), WSNs, etc.
-* **collective adaptive systems (CAS)**, including **self-organisation/swarm programming**, [aggregate computing]() (cf. spatial computing, amorphous computing)
+* **collective adaptive systems (CAS)**, including **self-organisation/swarm programming**, [aggregate computing](https://en.wikipedia.org/wiki/Aggregate_programming) (cf. spatial computing, amorphous computing)
 
 {{< callout note >}}The **micro-macro link** is a long-standing issue in MAS research, as well as in "complexity science" threads (e.g., study of emergent phenomena).{{< /callout >}}
 

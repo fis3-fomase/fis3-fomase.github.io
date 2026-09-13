@@ -1,0 +1,296 @@
+{{/* FoMaSE motion: scroll reveals, stat count-up, navbar state, hero field.   */}}
+{{/* Inlined deliberately — this project has no npm/bundler toolchain.         */}}
+{{/* Everything here is decorative and fails open: see the head-end hook.      */}}
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var reduced = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fallback() { root.classList.remove('js-reveal'); }
+
+  // ---------------------------------------------------------------- reveals
+  function revealAll(items) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-revealed');
+  }
+
+  function initReveals() {
+    var items = document.querySelectorAll('[data-reveal]');
+    if (!items.length) { root.setAttribute('data-reveal-ready', ''); return; }
+
+    // Reveal outright when animating would be wrong or unobservable:
+    // reduced motion, no IntersectionObserver, or a tab that starts hidden
+    // (Chrome does not deliver IO callbacks to background tabs, so observing
+    // there would leave the whole page invisible until it is focused).
+    if (reduced || !('IntersectionObserver' in window) || document.hidden) {
+      revealAll(items);
+      root.setAttribute('data-reveal-ready', '');
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        io.unobserve(entry.target);
+        if (entry.target.hasAttribute('data-countup')) countUp(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+    root.setAttribute('data-reveal-ready', '');
+
+    // Safety net: if anything inside the viewport is still hidden shortly
+    // after load, the observer is not doing its job — reveal everything
+    // rather than risk showing a blank page.
+    setTimeout(function () {
+      var stuck = false;
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].classList.contains('is-revealed')) continue;
+        var r = items[k].getBoundingClientRect();
+        if (r.top < (window.innerHeight || 0) && r.bottom > 0) { stuck = true; break; }
+      }
+      if (stuck) { io.disconnect(); revealAll(items); }
+    }, 1500);
+  }
+
+  // --------------------------------------------------------------- count-up
+  // Values on the homepage are things like "2026-2031", "~€1.1M", "5+
+  // Publications" and "University of Bologna". Only animate a value whose
+  // numeric core is unambiguous: one number, with optional non-digit prefix
+  // and suffix. Anything else is left exactly as authored.
+  function countUp(el) {
+    if (reduced) return;
+    var text = el.textContent.trim();
+    var m = /^([^0-9]*)([0-9]+(?:\.[0-9]+)?)([^0-9]*)$/.exec(text);
+    if (!m) return;
+
+    var prefix = m[1], suffix = m[3];
+    var target = parseFloat(m[2]);
+    var decimals = (m[2].split('.')[1] || '').length;
+    if (!isFinite(target) || target <= 0 || target > 100000) return;
+
+    var dur = 900, start = 0;
+    function frame(now) {
+      if (!start) start = now;
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = text;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------------------------------------------------------------- navbar
+  function initNavbar() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var ticking = false;
+    function update() {
+      nav.classList.toggle('is-scrolled', window.pageYOffset > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
+
+  // ------------------------------------------------------------ hero field
+  // A slow node-and-edge field with a wave propagating outward from a seed
+  // node: micro-level parts producing a macro-level pattern, which is the
+  // project's own subject. Purely decorative.
+  //
+  // Perf: the node set, the edge list and each node's distance from the seed
+  // are all computed ONCE per layout, and the accent colour is resolved once
+  // per theme change. A frame is then just a walk over a fixed edge list, so
+  // cost is independent of how long the page stays open.
+  function initHeroField() {
+    var canvas = document.querySelector('[data-hero-field]');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var MAX_NODES = 90;
+    var BUCKETS = 4;            // edge alpha buckets, to batch canvas state changes
+    var FRAME_MS = 1000 / 30;   // 30fps is plenty for motion this slow
+
+    var nodes = [], buckets = [], w = 0, h = 0, dpr = 1;
+    var raf = null, visible = false, t0 = 0, last = 0;
+    var maxR = 1, seedX = 0, seedY = 0, rgbPrefix = 'rgba(27,95,217,';
+
+    function resolveAccent() {
+      // Read from <body>, not <html>: the theme puts its `.dark` class on the
+      // body, so the dark token overrides only resolve there. Reading from the
+      // root would silently keep the light accent in dark mode.
+      var v = '';
+      try { v = getComputedStyle(document.body).getPropertyValue('--fm-accent').trim(); } catch (e) {}
+      var c = (v || '#1b5fd9').replace('#', '');
+      if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+      var n = parseInt(c, 16);
+      rgbPrefix = isNaN(n)
+        ? 'rgba(27,95,217,'
+        : 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',';
+    }
+
+    function build() {
+      var rect = canvas.getBoundingClientRect();
+      w = Math.max(1, Math.round(rect.width));
+      h = Math.max(1, Math.round(rect.height));
+      dpr = window.devicePixelRatio > 2 ? 2 : (window.devicePixelRatio || 1);
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      seedX = w * 0.18;
+      seedY = h * 0.72;
+      maxR = Math.sqrt(w * w + h * h);
+
+      // Loose jittered grid, density chosen so the node budget is not exceeded.
+      var step = Math.sqrt((w * h) / MAX_NODES);
+      if (step < 46) step = 46;
+      nodes = [];
+      for (var y = step * 0.5; y < h && nodes.length < MAX_NODES; y += step) {
+        for (var x = step * 0.5; x < w && nodes.length < MAX_NODES; x += step) {
+          var nx = x + (Math.random() - 0.5) * step * 0.5;
+          var ny = y + (Math.random() - 0.5) * step * 0.5;
+          nodes.push({
+            x: nx,
+            y: ny,
+            p: Math.random() * Math.PI * 2,
+            r: Math.sqrt((nx - seedX) * (nx - seedX) + (ny - seedY) * (ny - seedY))
+          });
+        }
+      }
+
+      // Edge list, bucketed by opacity so each frame issues BUCKETS strokes.
+      var linkDist = step * 1.55;
+      buckets = [];
+      for (var b = 0; b < BUCKETS; b++) buckets.push([]);
+      for (var i = 0; i < nodes.length; i++) {
+        for (var j = i + 1; j < nodes.length; j++) {
+          var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d > linkDist) continue;
+          var k = Math.min(BUCKETS - 1, Math.floor((1 - d / linkDist) * BUCKETS));
+          buckets[k].push(nodes[i], nodes[j]);
+        }
+      }
+    }
+
+    function draw(now) {
+      raf = null;
+      if (!t0) t0 = now;
+      if (now - last < FRAME_MS) { schedule(); return; }
+      last = now;
+
+      var t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, w, h);
+
+      // Edges: one path per alpha bucket.
+      ctx.lineWidth = 1;
+      for (var b = 0; b < BUCKETS; b++) {
+        var pts = buckets[b];
+        if (!pts.length) continue;
+        ctx.strokeStyle = rgbPrefix + (0.08 + b * 0.055).toFixed(3) + ')';
+        ctx.beginPath();
+        for (var e = 0; e < pts.length; e += 2) {
+          ctx.moveTo(pts[e].x, pts[e].y);
+          ctx.lineTo(pts[e + 1].x, pts[e + 1].y);
+        }
+        ctx.stroke();
+      }
+
+      // Nodes, brightened as the wave front sweeps past them.
+      var front = (t * 105) % (maxR * 1.3);
+      for (var k = 0; k < nodes.length; k++) {
+        var n = nodes[k];
+        var lit = 1 - Math.abs(n.r - front) / 120;
+        if (lit < 0) lit = 0;
+        var breathe = 0.5 + 0.5 * Math.sin(t * 0.8 + n.p);
+        var alpha = 0.22 + breathe * 0.12 + lit * 0.6;
+        if (alpha > 0.9) alpha = 0.9;
+        ctx.fillStyle = rgbPrefix + alpha.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 1.5 + lit * 2.6, 0, 6.2832);
+        ctx.fill();
+      }
+
+      schedule();
+    }
+
+    function schedule() {
+      if (raf || !visible || document.hidden || reduced) return;
+      raf = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    }
+
+    resolveAccent();
+    build();
+    canvas.classList.add('is-ready');
+
+    // Paint one frame synchronously so the field is present immediately —
+    // before any rAF, and even in a throttled/background tab. `visible` is
+    // still false here, so the schedule() at the end of draw() is a no-op.
+    draw(typeof performance !== 'undefined' ? performance.now() : Date.now());
+
+    // Under reduced motion that single static frame is all we ever draw.
+    if (reduced) return;
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) schedule(); else stop();
+      }, { threshold: 0 }).observe(canvas);
+    } else {
+      visible = true;
+      schedule();
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else schedule();
+    });
+
+    // The theme's day/night switch toggles a `dark` class on <body>, which
+    // swaps --fm-accent. Watch the class rather than guessing at the button's
+    // selector, so this also catches auto mode following the OS.
+    if (typeof MutationObserver !== 'undefined') {
+      var wasDark = document.body.classList.contains('dark');
+      new MutationObserver(function () {
+        var isDark = document.body.classList.contains('dark');
+        if (isDark === wasDark) return;
+        wasDark = isDark;
+        resolveAccent();
+        // Repaint now, so a paused or reduced-motion field re-colours too.
+        draw(typeof performance !== 'undefined' ? performance.now() : Date.now());
+      }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    var rt;
+    window.addEventListener('resize', function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        stop(); t0 = 0; last = 0; resolveAccent(); build(); schedule();
+      }, 200);
+    }, { passive: true });
+  }
+
+  function start() {
+    try { initReveals(); } catch (e) { fallback(); }
+    try { initNavbar(); } catch (e) { /* non-critical */ }
+    try { initHeroField(); } catch (e) { /* non-critical */ }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>

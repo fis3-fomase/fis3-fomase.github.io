@@ -1,32 +1,380 @@
-// Make page header alignment consistent with widget page header alignment
+// =============================================================================
+//  FoMaSE design system
+// =============================================================================
+//  Loaded by the theme's `assets/scss/main.scss` AFTER Bootstrap and the
+//  Wowchemy layer, and BEFORE `custom.scss`. This file owns tokens, typography,
+//  layout rhythm and shared components; `custom.scss` owns block-specific
+//  components and all motion.
+//
+//  NOTE: this file is run through Hugo's template engine before Sass sees it
+//  (resources.ExecuteAsTemplate), so `{{` and `}}` are live template delimiters.
+//  Do not introduce them, including inside comments.
+//
+//  Available from the theme (injected in main.scss from data/themes/fomase.toml):
+//    $sta-primary / -light / -dark, $sta-link, $sta-link-hover,
+//    $sta-background, $sta-home-section-odd / -even,
+//    $sta-menu-*, and a $sta-dark-* twin of each,
+//    $sta-font-body / -heading / -nav / -mono, $sta-font-size.
+// =============================================================================
+
+$font-cite: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+// -----------------------------------------------------------------------------
+//  1. Tokens
+// -----------------------------------------------------------------------------
+
+:root {
+  // Colour — light
+  --fm-accent:        #{$sta-primary};
+  --fm-accent-strong: #{$sta-link-hover};
+  --fm-accent-soft:   rgba(27, 95, 217, 0.09);
+  --fm-accent-ring:   rgba(27, 95, 217, 0.32);
+
+  --fm-ink:           #0f1723;
+  --fm-ink-muted:     #5a6472;
+  --fm-ink-faint:     #86909e;
+
+  --fm-surface:       #ffffff;
+  --fm-surface-alt:   #f6f8fb;
+  --fm-border:        #e4e8ee;
+  --fm-border-strong: #cfd6e0;
+
+  --fm-shadow-sm: 0 1px 2px rgba(15, 23, 35, 0.05);
+  --fm-shadow-md: 0 6px 20px -6px rgba(15, 23, 35, 0.14);
+  --fm-shadow-lg: 0 18px 48px -18px rgba(15, 23, 35, 0.26);
+
+  // Geometry
+  --fm-radius-sm: 6px;
+  --fm-radius:    10px;
+  --fm-radius-lg: 16px;
+
+  // Vertical rhythm
+  --fm-section-y: clamp(3.25rem, 6vw, 6rem);
+  --fm-gap:       clamp(1rem, 2vw, 1.75rem);
+
+  // Motion (see custom.scss; zeroed under prefers-reduced-motion)
+  --fm-ease:     cubic-bezier(0.22, 0.61, 0.36, 1);
+  --fm-dur:      420ms;
+  --fm-dur-fast: 180ms;
+}
+
+.dark {
+  --fm-accent:        #{$sta-dark-link};
+  --fm-accent-strong: #{$sta-dark-link-hover};
+  --fm-accent-soft:   rgba(111, 159, 255, 0.14);
+  --fm-accent-ring:   rgba(111, 159, 255, 0.38);
+
+  --fm-ink:           #e8edf4;
+  --fm-ink-muted:     #a3aebd;
+  --fm-ink-faint:     #79849380;
+
+  --fm-surface:       #0b1119;
+  --fm-surface-alt:   #111a25;
+  --fm-border:        #1f2b3a;
+  --fm-border-strong: #2d3c4f;
+
+  --fm-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --fm-shadow-md: 0 6px 20px -6px rgba(0, 0, 0, 0.6);
+  --fm-shadow-lg: 0 18px 48px -18px rgba(0, 0, 0, 0.8);
+}
+
+// -----------------------------------------------------------------------------
+//  2. Typography
+// -----------------------------------------------------------------------------
+
+body {
+  font-feature-settings: "kern" 1, "liga" 1, "cv11" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.005em;
+  line-height: 1.65;
+  color: var(--fm-ink);
+}
+
+h1, h2, h3, h4, h5, h6,
+.section-heading h1,
+.section-subheading {
+  font-family: $sta-font-heading, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--fm-ink);
+  letter-spacing: -0.022em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2rem, calc(1.35rem + 2.6vw), 3.15rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, calc(1.2rem + 1.3vw), 2.1rem);  font-weight: 650; }
+h3 { font-size: clamp(1.2rem, calc(1.07rem + 0.6vw), 1.5rem); font-weight: 600; }
+h4 { font-size: 1.1rem;  font-weight: 600; }
+
+// The theme centres every universal-wrapper h1; keep that, but give it air.
 .universal-wrapper h1 {
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-// Center the CTA shortcode button
-.cta-group {
-  justify-content: center;
+.article-style,
+.article-style p {
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--fm-ink);
 }
 
-#section-features {
-  // set background
-  // background-color: #ededed;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.article-style blockquote {
+  border-left: 3px solid var(--fm-accent);
+  background: var(--fm-accent-soft);
+  border-radius: 0 var(--fm-radius-sm) var(--fm-radius-sm) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 1.5rem 0;
+  font-family: $font-cite;
+  font-size: 1.02rem;
 }
 
-// Hero block with wide text layout
-.hero-wide-text .hero-media {
-  flex: 0 0 40%;
-  max-width: 40%;
+code, kbd, pre, samp, .article-metadata {
+  font-feature-settings: "kern" 1;
 }
 
-.hero-wide-text .text-md-left {
-  flex: 0 0 60%;
-  max-width: 60%;
-  font-size: 1.25rem;
+// -----------------------------------------------------------------------------
+//  3. Section rhythm
+// -----------------------------------------------------------------------------
+
+.home-section {
+  padding-top: var(--fm-section-y);
+  padding-bottom: var(--fm-section-y);
+  position: relative;
 }
 
-.fas {
-  color: #0055aa;
+// The theme alternates odd/even backgrounds; add a hairline so the seam still
+// reads when two same-coloured sections meet.
+.home-section + .home-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  // NB: libsass has built-in min()/max() Sass functions that shadow the CSS
+  // ones, so express this with calc + max-width instead.
+  width: calc(100% - 3rem);
+  max-width: 1100px;
+  height: 1px;
+  background: var(--fm-border);
+}
+
+.section-heading h1 {
+  margin-bottom: 0.35rem;
+}
+
+.section-heading p {
+  color: var(--fm-ink-muted);
+  font-size: 1.02rem;
+  max-width: 62ch;
+  margin-inline: auto;
+}
+
+// -----------------------------------------------------------------------------
+//  4. Navbar
+// -----------------------------------------------------------------------------
+
+.navbar-light {
+  background: color-mix(in srgb, #{$sta-menu-primary} 82%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: border-color var(--fm-dur-fast) var(--fm-ease),
+              box-shadow var(--fm-dur-fast) var(--fm-ease),
+              background-color var(--fm-dur-fast) var(--fm-ease);
+}
+
+.dark .navbar-light {
+  background: color-mix(in srgb, #{$sta-dark-menu-primary} 82%, transparent);
+}
+
+// Toggled from the motion script once the page is scrolled.
+.navbar-light.is-scrolled {
+  border-bottom-color: var(--fm-border);
+  box-shadow: var(--fm-shadow-sm);
+}
+
+.navbar-brand {
+  font-family: $sta-font-heading, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: var(--fm-radius-sm);
+  padding: 0.4rem 0.7rem;
+  transition: color var(--fm-dur-fast) var(--fm-ease),
+              background-color var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover {
+    background: var(--fm-accent-soft);
+    color: var(--fm-accent);
+  }
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+  font-weight: 600;
+  background: var(--fm-accent-soft);
+}
+
+// -----------------------------------------------------------------------------
+//  5. Hero
+// -----------------------------------------------------------------------------
+
+// `.hero-wide-text` is applied via `design.css_class` on the hero block in
+// content/_index.md.
+.hero-wide-text {
+  .hero-media {
+    flex: 0 0 42%;
+    max-width: 42%;
+    position: relative;
+  }
+
+  .text-md-left {
+    flex: 0 0 58%;
+    max-width: 58%;
+  }
+}
+
+.wg-hero {
+  overflow: hidden;
+
+  .hero-title {
+    font-size: clamp(2.4rem, calc(1.5rem + 3.4vw), 4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-lead,
+  .hero-text {
+    font-size: clamp(1rem, calc(0.96rem + 0.25vw), 1.12rem);
+    line-height: 1.68;
+    color: var(--fm-ink-muted);
+    max-width: 60ch;
+
+    strong { color: var(--fm-ink); font-weight: 600; }
+  }
+
+  .hero-media img {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--fm-radius-lg);
+  }
+
+  // Soft glow behind the hero artwork.
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 4% 4% 4% 4%;
+    z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--fm-accent-soft), transparent 78%);
+    filter: blur(26px);
+  }
+}
+
+// -----------------------------------------------------------------------------
+//  6. Cards (shared by news cards, people cards, publication rows)
+// -----------------------------------------------------------------------------
+
+%fm-card {
+  background: var(--fm-surface);
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  box-shadow: var(--fm-shadow-sm);
+  transition: transform var(--fm-dur-fast) var(--fm-ease),
+              border-color var(--fm-dur-fast) var(--fm-ease),
+              box-shadow var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--fm-border-strong);
+    box-shadow: var(--fm-shadow-md);
+  }
+}
+
+.card-simple,
+.media.stream-item {
+  @extend %fm-card;
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.article-metadata,
+.article-metadata a {
+  font-family: $sta-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: var(--fm-ink-faint);
+}
+
+.article-title,
+.article-title a {
+  font-family: $sta-font-heading, sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.018em;
+  color: var(--fm-ink);
+}
+
+// -----------------------------------------------------------------------------
+//  7. Links, buttons, focus
+// -----------------------------------------------------------------------------
+
+.article-style a:not(.btn),
+.pub-list__intro a:not(.btn) {
+  color: var(--fm-accent);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--fm-dur-fast) var(--fm-ease),
+              color var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover {
+    color: var(--fm-accent-strong);
+    background-size: 100% 1.5px;
+  }
+}
+
+.btn-links .btn,
+.btn-outline-primary {
+  --bs-btn-focus-shadow-rgb: none;
+  border-radius: 999px;
+  border: 1px solid var(--fm-border-strong);
+  color: var(--fm-ink-muted);
+  background: transparent;
+  font-family: $sta-font-nav, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.24rem 0.78rem;
+  transition: color var(--fm-dur-fast) var(--fm-ease),
+              border-color var(--fm-dur-fast) var(--fm-ease),
+              background-color var(--fm-dur-fast) var(--fm-ease);
+
+  &:hover,
+  &:focus {
+    color: var(--fm-accent);
+    border-color: var(--fm-accent);
+    background: var(--fm-accent-soft);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--fm-accent);
+  outline-offset: 2px;
+  border-radius: var(--fm-radius-sm);
+}
+
+// Font Awesome icons inherit the accent rather than a hard-coded hex.
+// (The previous rule was `.fas { color: #0055aa }`, which fought the palette.)
+.featurette-icon .fas,
+.featurette-icon .fab,
+.featurette-icon .far {
+  color: var(--fm-accent);
 }

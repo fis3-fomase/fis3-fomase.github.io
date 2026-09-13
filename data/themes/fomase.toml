@@ -1,0 +1,43 @@
+# FoMaSE colour pack — "Academic ink + signal blue".
+#
+# This is the LEGACY (blox-bootstrap v5) theme format: `[light]` / `[dark]`
+# tables consumed by `partials/functions/parse_theme.html`. It is NOT the same
+# as a modern "HugoBlox Theme Pack" (`hugoblox.meta.format: hugoblox-theme@1`),
+# which this engine cannot read.
+#
+# Both tables are required: parse_theme.html silently falls back to the
+# built-in `minimal` pack if `theme_night` names a pack with no [dark] table.
+
+name = "FoMaSE"
+
+[light]
+  primary = "#1b5fd9"
+
+  menu_primary = "#ffffff"
+  menu_text = "#3d4756"
+  menu_text_active = "#1b5fd9"
+  menu_title = "#0f1723"
+
+  link = "#1b5fd9"
+  link_hover = "#14489f"
+  link_decoration = "none"
+
+  background = "#ffffff"
+  home_section_odd = "#ffffff"
+  home_section_even = "#f6f8fb"
+
+[dark]
+  primary = "#6f9fff"
+
+  menu_primary = "#0f1723"
+  menu_text = "#aeb8c6"
+  menu_text_active = "#6f9fff"
+  menu_title = "#f2f5f9"
+
+  link = "#6f9fff"
+  link_hover = "#9dbdff"
+  link_decoration = "none"
+
+  background = "#0b1119"
+  home_section_odd = "#0b1119"
+  home_section_even = "#111a25"

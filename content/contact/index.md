@@ -8,7 +8,9 @@ sections:
   - block: contact
     content:
       title: Contacts
-      text: |-        
+      text: |-
+        Interested in collaborating, or in a post-doc or PhD position on FoMaSE?
+        Get in touch — we are always glad to hear from prospective collaborators.
       email: roby.casadei@unibo.it
       #phone: 888 888 88 88
       address:

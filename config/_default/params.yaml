@@ -7,11 +7,13 @@
 # Appearance
 
 appearance:
- theme_day: earth
- # minimal, forest, mr robot, coffee, ocean, rose, earth 
- theme_night:
- font: native
- font_size: L
+  # Custom packs live in `data/themes/fomase.toml` and `data/fonts/fomase.toml`.
+  # Built-in alternatives: minimal, forest, mr robot, coffee, ocean, rose, earth.
+  theme_day: fomase
+  theme_night: fomase
+  font: fomase
+  # xs=14 s=16 m=18 l=21 xl=23 (px base)
+  font_size: M
 
 
 # SEO
@@ -20,7 +22,7 @@ marketing:
   seo:
     site_type: Organization
     local_business_type: ''
-    org_name: ''
+    org_name: 'FoMaSE — Foundations for Macroprogramming-based Software Engineering'
     description: 'The FoMaSE (Foundations for Macroprogramming-based Software Engineering) basic research project, 
         led by principal investigator Roberto Casadei,  
         was awarded the Italian FIS3 Starting Grant for ~€1.1M.  
@@ -28,7 +30,7 @@ marketing:
         artificial collective intelligence by a computer science and software engineering perspective,
         enabling predictable design of intelligent services and applications (for smart cities and beyond) 
         backed by autonomous artificial collectives.'
-    twitter: 'GetResearchDev'
+    twitter: ''
   analytics:
     google_analytics: 'G-K8FCXYB318'
     baidu_tongji: ''

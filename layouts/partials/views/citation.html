@@ -1,0 +1,47 @@
+{{/* FoMaSE override of the theme's `citation` view.                          */}}
+{{/* The theme ships an inline APA/MLA string; this renders a structured row  */}}
+{{/* so publications can be scanned by title, venue and year.                 */}}
+{{/* Used by: the publication_list block, the homepage "Latest Publications"  */}}
+{{/* collection block, and every {{< cite view="4" >}} call on /details.      */}}
+
+{{ $item := .item }}
+{{/* Year-grouped lists already show the year in a rail; let them suppress it. */}}
+{{ $show_year := .show_year | default true }}
+
+{{/* Map CSL publication types to a short, human label. */}}
+{{ $types := dict
+  "article-journal" "Journal"
+  "paper-conference" "Conference"
+  "chapter" "Book chapter"
+  "book" "Book"
+  "thesis" "Thesis"
+  "manuscript" "Preprint"
+  "report" "Report"
+  "speech" "Talk"
+  "patent" "Patent"
+}}
+{{ $type := "" }}
+{{ with $item.Params.publication_types }}
+  {{ $type = index $types (index . 0) }}
+{{ end }}
+
+{{ $venue := $item.Params.publication_short | default $item.Params.publication }}
+
+<article class="pub-item" data-reveal>
+  <header class="pub-item__head">
+    <h3 class="pub-item__title">
+      <a href="{{ $item.RelPermalink }}">{{ $item.Title | markdownify | emojify }}</a>
+    </h3>
+    <div class="pub-item__badges">
+      {{ with $type }}<span class="pub-badge">{{ . }}</span>{{ end }}
+      {{ if $show_year }}<span class="pub-year">{{ $item.Date.Format "2006" }}</span>{{ end }}
+    </div>
+  </header>
+
+  <div class="pub-item__authors">{{ partial "page_metadata_authors" $item }}</div>
+
+  {{ with $venue }}<div class="pub-item__venue">{{ . | markdownify | emojify }}</div>{{ end }}
+
+  {{ $links := partial "page_links" (dict "page" $item "is_list" 1) }}
+  {{ with trim $links " \n\t" }}<div class="pub-item__links btn-links">{{ $links }}</div>{{ end }}
+</article>

@@ -34,7 +34,10 @@ jobs:
         # Check `.bib` file exists for case when action runs on `.bib` deletion
         # Note GH only provides hashFiles func in `steps.if` context, not `jobs.if` context
         if: ${{ hashFiles('publications.bib') != '' }}
-        run: academic import publications.bib content/publications/ --compact
+        # Import directly into the live `content/publication/` section.
+        # `academic import` never overwrites an existing page unless `--overwrite`
+        # is passed, so hand-written abstracts and notes survive every re-import.
+        run: academic import publications.bib content/publication/ --compact
       - name: Create Pull Request
         # Set ID for `Check outputs` stage
         id: cpr
@@ -43,8 +46,13 @@ jobs:
           commit-message: 'content: import publications from Bibtex'
           title: Hugo Blox Builder - Import latest publications
           body: |
-            Import the latest publications from `publications.bib` to `content/publications/`.
-            Recall to copy them to `content/publication/` if you want them to appear in the Publications page.
+            Import the latest publications from `publications.bib` into `content/publication/`.
+
+            Existing pages are left untouched, so any hand-written abstract or note is preserved.
+            New pages are tagged from the entry's `keywords` field: use `keywords = { fomase }`
+            for project outputs (they then appear under "FoMaSE Outputs" on the Publications page)
+            and `keywords = { previous }` for prior work.
+
             [View Documentation](https://github.com/GetRD/academic-file-converter)
           base: main
           labels: automated-pr, content
