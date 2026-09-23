@@ -32,3 +32,5 @@ tags:
 ---
 
 This paper has been accepted in the Blue Sky Ideas track of AAMAS'26.
+
+- [Video presentation](https://www.youtube.com/watch?v=iqm9d-0AbeU) 
