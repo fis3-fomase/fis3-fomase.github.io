@@ -135,6 +135,23 @@ sections:
 
   - block: collection
     content:
+      title: Publication Highlights
+      text: ""
+      count: 5
+      filters:
+        folders:
+          - publication
+        tag: "highlight"
+        #publication_type: 'article'
+        #author: Roberto Casadei
+    design:
+      view: citation
+      columns: '1'
+      spacing:
+        padding: [45px,0,0,0]
+
+  - block: collection
+    content:
       title: Latest Publications
       text: ""
       count: 5

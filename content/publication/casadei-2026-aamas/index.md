@@ -7,8 +7,7 @@ date: '2026-01-01'
 publishDate: '2026-03-06T10:53:18.031623Z'
 publication_types:
 - paper-conference
-publication: '*International Foundation for Autonomous Agents and Multiagent Systems
-  / ACM*'
+publication: '*International Foundation for Autonomous Agents and Multiagent Systems / ACM*'
 doi: 10.65109/SAXG2906
 abstract: >-
   This paper elaborates on the opportunity and idea of multi-agent system (MAS)
@@ -29,6 +28,7 @@ abstract: >-
   community debate.
 tags:
 - fomase
+- highlight
 ---
 
 This paper has been accepted in the Blue Sky Ideas track of AAMAS'26.

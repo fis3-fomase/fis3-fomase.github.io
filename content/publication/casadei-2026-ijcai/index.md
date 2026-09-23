@@ -17,4 +17,5 @@ publication: '*Proceedings of the Thirty-Fifth International Joint Conference on
 doi: 10.24963/ijcai.2026/838
 tags:
 - fomase
+- highlight
 ---
