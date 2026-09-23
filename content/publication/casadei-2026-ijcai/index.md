@@ -15,4 +15,6 @@ publication_types:
 publication: '*Proceedings of the Thirty-Fifth International Joint Conference on Artificial
   Intelligence*'
 doi: 10.24963/ijcai.2026/838
+tags:
+- fomase
 ---
