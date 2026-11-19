@@ -10,7 +10,7 @@ last_name: Casadei
 superuser: true
 
 # Role/position
-role: Assistant Professor in Computer Science and Engineering @ University of Bologna
+role: Associate Professor in Computer Science and Engineering @ University of Bologna
 
 # Organizations/Affiliations
 organizations:
@@ -78,4 +78,4 @@ user_groups:
   - Principal Investigator
 ---
 
-Roberto Casadei is a senior assistant professor at the University of Bologna (Italy). He has a PhD in Computer Science & Engineering from the same university, with a thesis awarded by the IEEE TCSC. His research interests revolve around software engineering and distributed artificial intelligence. He has 80+ publications in international journals and conferences on topics including collective intelligence, swarm robotics, self-* systems, and IoT/CPS. He also contributed to open-source programming frameworks and simulators (e.g., ScaFi). He has served as PC chair of COORDINATION'26, and participated in the organizing and program committees of many conferences such as ACSOS, DisCoTec, ICCCI, AAAI, ECAI, and SAC, as a guest editor and reviewer for renowned international journals, and associate editor of Elsevier IoT, JAISCR, and Wiley CCPE. He received the IEEE TCSC Award for Excellence'24 (ECR), for contributions to "paradigms supporting the engineering of large-scale collective and self-organizing systems". He was awarded the FIS3 Starting Grant for €1.1M for his project FoMaSE.
+Roberto Casadei is an associate professor at the University of Bologna (Italy). He has a PhD in Computer Science & Engineering from the same university, with a thesis awarded by the IEEE TCSC. His research interests revolve around software engineering and distributed artificial intelligence. He has 80+ publications in international journals and conferences on topics including collective intelligence, swarm robotics, self-* systems, and IoT/CPS. He also contributed to open-source programming frameworks and simulators (e.g., ScaFi). He has served as PC chair of COORDINATION'26, and participated in the organizing and program committees of many conferences such as ACSOS, DisCoTec, ICCCI, AAAI, ECAI, and SAC, as a guest editor and reviewer for renowned international journals, and associate editor of Elsevier IoT, JAISCR, and Wiley CCPE. He received the IEEE TCSC Award for Excellence'24 (ECR), for contributions to "paradigms supporting the engineering of large-scale collective and self-organizing systems". He was awarded the FIS3 Starting Grant for €1.1M for his project FoMaSE.
